@@ -3,11 +3,9 @@
 This repository has the code to perform the Goodness of Pronunciation algorithm using Pykaldi. It is meant to facilitate experimentation with EpaDB, a database of non-native English speech by Spanish speakers from Argentina intended for research on mispronunciation detection and development of pronunciation scoring systems. 
 
 The Goodness of Pronunciation (GOP) method [1] estimates scores for each phone in a phrase as the posterior probabilities of the target phones (i.e., the phones the student should pronounce) computed using the acoustic model from an automatic speech recognition (ASR) system trained only on native data.
-Traditionally, GOP scores were computed using GMM-based acoustic models. In recent years, though, significant improvements have been shown using DNN-based acoustic models [2]. In these cases, the GOP score for a target phone $p$ that starts at frame $T$ and has a length of $D$ frames is computed as
-$
-GOP(p)=-\frac{1}{D}\sum_{t=T}^{T+D-1}\log P_t(p|O)
-$
-where $O$ is the full sequence of features for the waveform and $P_t(p|O)$ is an estimate of the posterior probability for phone $p$ at frame $t$. The start and end frames for each target phone are obtained using a forced-aligner given the word transcription. 
+Traditionally, GOP scores were computed using GMM-based acoustic models. In recent years, though, significant improvements have been shown using DNN-based acoustic models [2]. In these cases, the GOP score for a target phone p that starts at frame T and has a length of D frames is computed as
+<img src="https://render.githubusercontent.com/render/math?math=GOP(p)=-\frac{1}{D}\sum_{t=T}^{T+D-1}\log P_t(p|O)">
+where O is the full sequence of features for the waveform and <img src="https://render.githubusercontent.com/render/math?math=P_t(p|O)"> is an estimate of the posterior probability for phone p at frame t. The start and end frames for each target phone are obtained using a forced-aligner given the word transcription. 
 
 The system uses a PyTorch acoustic model based on Kaldi's TDNN-F acoustic model so a script is provided to convert Kaldi's model to PyTorch.
 
@@ -30,7 +28,7 @@ To install this repository, follow this steps:
 
 1. Clone this repository:
 ```
-git clone https://github.com/jazminvidal/gop-pykaldi.git
+git clone https://github.com/JazminVidal/gop-pykaldi.git
 ```
 2. Install the requirements:
 ```
