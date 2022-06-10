@@ -5,7 +5,7 @@ This repository has the code to perform the Goodness of Pronunciation algorithm 
 The Goodness of Pronunciation (GOP) method [1] estimates scores for each phone in a phrase as the posterior probabilities of the target phones (i.e., the phones the student should pronounce) computed using the acoustic model from an automatic speech recognition (ASR) system trained only on native data.
 Traditionally, GOP scores were computed using GMM-based acoustic models. In recent years, though, significant improvements have been shown using DNN-based acoustic models [2]. In these cases, the GOP score for a target phone p that starts at frame T and has a length of D frames is computed as:
 
-$GOP(p)=$ $-\frac{1}{D}$ $\sum_{t=T}^{T+D-1}\log P_t(p|O)$
+$GOP(p)=-\frac{1}{D} (\sum)_{t=T}^{T+D-1}\log P_t(p|O)$
 
 where O is the full sequence of features for the waveform and $P_t(p|O)$ is an estimate of the posterior probability for phone p at frame t. The start and end frames for each target phone are obtained using a forced-aligner given the word transcription. 
 
