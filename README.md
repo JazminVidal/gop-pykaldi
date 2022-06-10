@@ -23,7 +23,7 @@ The system uses a PyTorch acoustic model based on Kaldi's TDNN-F acoustic model 
 ## Prerequisites
 1. [Kaldi](http://kaldi-asr.org/) installed.
 2. TextGrid managing library installed using pip. Instructions at this [link](https://pypi.org/project/praat-textgrids/).
-3. PyKaldi installed. Follow instructions at this [link] (https://github.com/pykaldi/pykaldi#installation)
+3. PyKaldi installed. Follow instructions at this [link](https://github.com/pykaldi/pykaldi#installation)
 4. The EpaDB database downloaded (you can ask for it at jvidal@dc.uba.ar). 
 
 ## How to install
