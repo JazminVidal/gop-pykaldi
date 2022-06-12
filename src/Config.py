@@ -1,5 +1,5 @@
 import yaml
-from src.utils.run_utils import *
+from src.utils.run_utils import get_experiment_directory, get_run_name, add_data_keys_to_config_dict, get_phone_count
 
 def add_gop_and_exp_common_keys(config_dict, config_yaml, use_heldout):
         config_dict["experiment-dir-path"] 	 = get_experiment_directory(config_yaml, use_heldout=use_heldout)
@@ -36,10 +36,6 @@ class ExperimentConfig():
 
         if not use_heldout:
             config_dict["full-gop-score-path"] = config_dict["gop-scores-dir"] + "gop-all-folds.txt"
-
-	    #If only one layer will be trained or finetune model path is not defined, make finetune model path relative to experiment dir
-        if config_dict["layers"] == 1 or "finetune-model-path" not in config_dict:
-            config_dict["finetune-model-path"]   = config_dict["experiment-dir-path"] + "/model_finetuning_kaldi.pt"
 
         self.config_dict = config_dict
 

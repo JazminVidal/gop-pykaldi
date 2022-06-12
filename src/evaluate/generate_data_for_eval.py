@@ -4,15 +4,12 @@ from os import remove
 import numpy as np
 import textgrids # pip install git+https://github.com/Legisign/Praat-textgrids
 from scipy.stats.stats import pearsonr
-from IPython import embed
 import pandas as pd
 import joblib
-import shutil
-import argparse
-import glob
 
-from src.utils.reference_utils import *
-from src.utils.finetuning_utils import *
+
+from src.utils.reference_utils import generate_utterance_list_from_path, get_reference_from_system_alignments, get_phone_dictionaries
+
 
 def phonelist2str(phones):
     return " ".join(["%3s"%p for p in phones])

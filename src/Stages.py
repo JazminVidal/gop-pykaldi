@@ -1,6 +1,3 @@
-import os
-from IPython import embed
-
 
 class ComplexStage():
 
@@ -12,7 +9,6 @@ class ComplexStage():
         self._substages      = substages
         self._substage_names = [substage.name() for substage in substages]
         self._name           = name
-        #self._config_dict    = config_dict.copy()   
     
     def run(self, from_stage=None, to_stage=None):
         #Run substages from_stage:to_stage 
@@ -36,7 +32,6 @@ class ComplexStage():
 class AtomicStage():
 
     def __init__(self, config_dict):
-        #self._name        = name
         self._config_dict = config_dict.copy()
 
     def run(self):

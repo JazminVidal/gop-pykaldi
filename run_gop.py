@@ -1,9 +1,8 @@
-import sys
-import yaml
-from src.utils.run_utils import *
-from src.GopStages import *
+from src.Stages import ComplexStage
+from src.ExperimentStages import CreateExperimentDirectoryStage
+from src.GopStages import GopHeldoutStage, EvaluateGopStage, GopStage
 from src.Config import GopConfig
-from IPython import embed
+import argparse
 
 def run_all(config_yaml, from_stage, to_stage, use_heldout):
 
@@ -14,7 +13,6 @@ def run_all(config_yaml, from_stage, to_stage, use_heldout):
     eval_stage    = EvaluateGopStage(config_dict)
 
     gop_pipeline  = ComplexStage([prepdir_stage, gop_stage, eval_stage], "gop-pipeline")
-
     gop_pipeline.run()
 
 

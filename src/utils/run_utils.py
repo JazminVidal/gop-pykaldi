@@ -1,10 +1,5 @@
-import sys
-import yaml
-import argparse
 import os
-from IPython import embed
-
-from src.ExperimentStages import *
+# from src.ExperimentStages import *
 
 def generate_arguments(args_dict):
 	res = ""
@@ -34,46 +29,6 @@ def get_run_name(config_yaml, use_heldout=False):
 def get_experiment_directory(config_yaml, use_heldout=False):
 	return "experiments/" + get_run_name(config_yaml, use_heldout) + '/'
 
-def swa_identifier(is_swa):
-	if is_swa:
-		swa_identifier = '_swa'
-	else:
-		swa_identifier = ''
-
-	return swa_identifier
-
-def get_eval_filename(epoch, is_swa):
-	swa_id = swa_identifier(is_swa)
-	return "data_for_eval_epoch" + str(epoch) + swa_id + ".pickle"
-
-def fold_identifier(use_heldout, fold_number):
-	if use_heldout:
-		fold_identifier = ''
-	else:
-		fold_identifier = '-fold-' + str(fold_number)
-		
-	return fold_identifier
-
-
-def get_model_name(config_dict, fold, epoch=None, use_heldout=False, swa=False):
-	if epoch == None:
-		epoch  = config_dict["epochs"]
-	run_name   = config_dict["run-name"]
-	
-	swa_id  = swa_identifier(swa)
-	fold_id = fold_identifier(use_heldout, fold)
-
-	return run_name +  fold_id + '-epoch-' + str(epoch) + swa_id #Aca hay codigo repetido entre el PATH de train y esto
-
-def get_test_sample_list_path_for_fold(test_sample_list_dir, fold):
-	return test_sample_list_dir + "/test_sample_list_fold_" + str(fold) #Aca tmb codigo repetido
-
-def get_eval_stage(config_dict, epoch, is_swa=False):
-    if config_dict.get("held-out"):
-        return EvaluateScoresHeldoutStage(config_dict, epoch=epoch, is_swa=is_swa)
-    else:
-        return EvaluateScoresCrossValStage(config_dict, epoch=epoch, is_swa=is_swa)
-
 def add_data_keys_to_config_dict(config_dict, setup):
 
 	if setup == "dataprep":
@@ -100,8 +55,3 @@ def add_data_keys_to_config_dict(config_dict, setup):
 
 	return config_dict
 
-def get_eval_stage(config_dict, epoch="", is_swa=False):
-    if config_dict.get("held-out"):
-        return EvaluateScoresHeldoutStage(config_dict, epoch=epoch, is_swa=is_swa)
-    else:
-        return EvaluateScoresCrossValStage(config_dict, epoch=epoch, is_swa=is_swa)

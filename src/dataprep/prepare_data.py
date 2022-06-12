@@ -1,8 +1,7 @@
-import glob
 import os
-import argparse
-from src.utils.FeatureManager import FeatureManager
+import glob
 from src.utils.utils import makedirs_for_file
+from src.utils.FeatureManager import FeatureManager
 import src.dataprep.convert_chain_to_pytorch as convert_chain_to_pytorch
 from IPython import embed
 
@@ -107,7 +106,7 @@ def main(config_dict):
 
     #Download librispeech models and extract them into librispeech-models-path
     download_librispeech_models(librispeech_models_path)
-
+    
     #Prepare pytorch models
     prepare_pytorch_models(pytorch_models_path, libri_chain_mdl_path, libri_chain_txt_path, acoustic_model_path)
 

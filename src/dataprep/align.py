@@ -4,11 +4,7 @@ from kaldi.alignment import MappedAligner
 from kaldi.fstext import SymbolTable
 from kaldi.lat.align import WordBoundaryInfoNewOpts, WordBoundaryInfo
 import torch
-import numpy as np
-import pickle
 import tqdm
-import argparse
-import os
 from src.utils.FeatureManager import FeatureManager
 from src.utils.utils import makedirs_for_file
 from src.pytorch_models.FTDNNAcoustic import *
@@ -77,9 +73,7 @@ def main(config_dict):
             loglikes_writer[logid] = loglikes
             out = aligner.align(loglikes, text)
             log_alignments(aligner, phones, out["alignment"], logid, align_out_file)
-            #phone_alignment = aligner.to_phone_alignment(out["alignment"], phones)
-            #align_out_file.write(logid + ' phones ' + str(phone_alignment)  + '\n')
-            #align_out_file.write(logid + ' transitions ' + str(out['alignment']) + '\n') 
+
 
 
 

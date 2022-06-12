@@ -1,9 +1,6 @@
-import os
-from IPython import embed
-
 import src.gop.calculate_gop as calculate_gop
 import src.evaluate.generate_data_for_eval as generate_data_for_eval
-from src.Stages import *
+from src.Stages import AtomicStage
 
 
 class GopStage(AtomicStage):

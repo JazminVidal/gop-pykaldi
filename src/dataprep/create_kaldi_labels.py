@@ -5,12 +5,7 @@ import numpy as np
 from scipy.stats.stats import pearsonr
 from IPython import embed
 import pandas as pd
-import joblib
-import shutil
-import argparse
-import glob
-from src.utils.reference_utils import *
-from src.utils.finetuning_utils import *
+from src.utils.reference_utils import generate_utterance_list_from_path, get_reference_from_system_alignments
 
 def log_problematic_utterance(utterance):
     pu_fh = open("problematic_utterances", "a+")
@@ -30,9 +25,7 @@ def match_trans_lengths(trans_dict, start_times, end_times):
 
     #Ojo con esto, no deberia hacer falta
     if len(trans_auto) != len(trans_manual):
-        log_problematic_utterance(utterance)
-        trans_manual, trans_auto, labels, start_times, end_times = remove_deletion_lines(trans_manual, trans_auto, labels, 
-                                                       remove_times=True, start_times=start_times, end_times=end_times)
+        print('length_differ at match_lens_trans')
 
     return trans_auto, trans_manual, labels, start_times, end_times
 
@@ -96,8 +89,7 @@ def remove_deletion_lines_with_times(trans1, trans2, labels, start_times, end_ti
                 clean_start_times.append(start_times[i])
                 clean_end_times.append(end_times[i])
             except IndexError as e:
-                log_problematic_utterance(utterance)
-                embed()
+                print('problem at remove_deletion_lines_with_times')
     return clean_trans1, clean_trans2, clean_labels, clean_start_times, clean_end_times
 
 def remove_deletion_lines(trans1, trans2, labels, remove_times=False, start_times=None, end_times=None):
@@ -139,8 +131,6 @@ def main(config_dict):
         start_times, end_times = get_times(kaldi_alignments, utterance)
         target_column, trans_manual, labels, start_times, end_times = match_trans_lengths(trans_dict[utterance], start_times, end_times)       
 
-
-        #outdir  = "%s/labels_with_kaldi_phones/%s/labels" % (args.output_dir_path, spk)
         outdir  = "%s/%s/labels" % (output_dir_path, spk)
         outfile = "%s/%s.txt" % (outdir, utterance)
         
